@@ -19,7 +19,7 @@
   "timePeriod": "Periodo de tiempo",
   "orderDate": "Fecha de Orden",
   "customerInfo": "Información del Cliente",
-  "contact": "Contacto",
+  "Email": "Correo electrónico",
   "address": "Dirección",
   "workOrderDetails": "Detalles de la Orden de Trabajo",
   "assignedTo": "Asignado a",
@@ -67,5 +67,6 @@
     "rescheduled": "reprogramado"
   },
 "no_work_order_assigned": "No hay órdenes de trabajo asignadas",
-"no_work_order_message": "No hay órdenes de trabajo disponibles en este momento."
+"no_work_order_message": "No hay órdenes de trabajo disponibles en este momento.",
+" Work Orders":"Órdenes de trabajo"
 }
