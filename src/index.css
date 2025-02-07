@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.sidebar {
+  min-height: 100vh;
+  /* background: #2c3e50; */
+  background: #2e2e32;
+  color: white;
+  transition: all 0.3s;
+}
+
+.sidebar .nav-link {
+  color: #ecf0f1;
+  padding: 15px 20px;
+  transition: all 0.2s;
+}
+
+.sidebar .nav-link:hover {
+  background: #34495e;
+  color: #fff;
+}
+
+.sidebar .nav-link.active {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.sidebar-header {
+  padding: 20px;
+  /* background: #243342; */
+  background: #1a1a1b
+}
+
+.main-content {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.work-order-card {
+  transition: transform 0.2s;
+  border-left: 4px solid transparent;
+}
+
+.work-order-card:hover {
+  transform: translateY(-2px);
+}
+
+.work-order-card.urgent {
+  border-left-color: #e74c3c;
+}
+
+.work-order-card.pending {
+  border-left-color: #f1c40f;
+}
+
+.work-order-card.completed {
+  border-left-color: #2ecc71;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+.status-badge.urgent {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.status-badge.pending {
+  background-color: #f1c40f;
+  color: black;
+}
+
+.status-badge.completed {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.filter-bar {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.login-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 10px;
+}
+
+.login-card .form-control {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+.login-card .btn-primary {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #212529;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    min-height: auto;
+  }
+  
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
