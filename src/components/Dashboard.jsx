@@ -243,7 +243,7 @@ const Dashboard = ({ workOrders, setIsLoggedIn, getWorkOrders }) => {
           {/* Work Orders & Details (All in One Column) */}
           <Row>
             <Col xs={12}>
-              <h5 className="text-capitalize">{`${activeFilter} Work Orders`}</h5>
+            {/* <h5 className="text-capitalize">{`${activeFilter} ${t("Work Orders")}`}</h5> */}
               {filteredWorkOrders?.length == 0 && (
               
                 // <div className="text-danger">{`No ${activeFilter} Work order ${dateFilter}`}</div>
