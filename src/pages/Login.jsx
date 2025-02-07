@@ -42,7 +42,8 @@ const Login = () => {
         
         <div className="text-center mb-4"><img
                   width={"100px"}
-                  src="https://demos.creative-tim.com/material-dashboard/assets/img/logo-ct-dark.png"
+                  src="https://swif.truet.net/public/swifCompany/logo/logo.png"
+                  // src="https://demos.creative-tim.com/material-dashboard/assets/img/logo-ct-dark.png"
                   alt="Logo"
                 />
               </div>
