@@ -136,14 +136,35 @@ import Sidebar from "./Sidebar";
 import FilterBar from "./FilterBar";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getWorkerOrderList } from "../lib/store";
 
-const Dashboard = ({ workOrders, setIsLoggedIn, getWorkOrders }) => {
+const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("today");
   const [language, setLanguage] = useState("en");
 
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const [workOrders, setWorkOrders] = useState([]);
+  const token=localStorage.getItem('UserToken');
+  const userId=localStorage.getItem('userId');
+  console.log('sss',token)
+  
+  const getWorkOrders = () =>{
+    console.log('workorder hit')
+    const response=getWorkerOrderList(userId,token)
+    .then((response)=>{
+      console.log('response',response.data);
+      setWorkOrders(response.data)
+    })
+  
+  }
+
+  useEffect(()=>{
+  console.log('token', token);
+      getWorkOrders();
+    
+  },[token]);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -157,7 +178,6 @@ const Dashboard = ({ workOrders, setIsLoggedIn, getWorkOrders }) => {
 //     });
 // }
   const handleLogout = () => {
-    setIsLoggedIn(false);
     localStorage.clear();
     navigate("/login");
   };
