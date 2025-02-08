@@ -37,12 +37,15 @@ const WorkOrderDetails = ({ workOrder }) => {
               <strong>{t('assignedTo')}:</strong> {workOrder.assignedTo}
             </p> */}
             <p className="mb-2">
-              <strong>{t('estimatedDuration')}:</strong>  {
+               <strong>{t('estimatedDuration')}: </strong> 
+               {/* {
                               moment(workOrder.basicWorkorderDetails.expectedTime, "HH:mm").diff(
                                 moment(workOrder.basicWorkorderDetails.startTime, "HH:mm"),
                                 "minutes"
                               )
-                            } minutes
+                            } minutes */
+                            workOrder.basicWorkorderDetails.expectedTime
+                            }
             </p>
             <p className="mb-2">
               <strong>{t('description')}:</strong> {workOrder.workorderDetails[0]?.workDescription}

@@ -67,5 +67,7 @@
     "rescheduled": "reprogramado"
   },
 "no_work_order_assigned": "No hay órdenes de trabajo asignadas",
-"no_work_order_message": "No hay órdenes de trabajo disponibles en este momento."
+"no_work_order_message": "No hay órdenes de trabajo disponibles en este momento.",
+"Hours": "Horas"
+
 }

@@ -20,7 +20,7 @@ const WorkOrderList = ({ workOrders,getWorkOrders }) => {
       {t(status)}
     </Badge>
   );
-  // console.log(workOrders);
+  console.log(workOrders);
 
   return (
     <div className="work-order-list">
@@ -49,11 +49,12 @@ const WorkOrderList = ({ workOrders,getWorkOrders }) => {
                 {/* <small>Assigned to: {order.assignedTo}</small> */}
                 {/* <small>{order.estimatedDuration}</small> */}
                 {
-                moment(order.basicWorkorderDetails.expectedTime, "HH:mm").diff(
-                  moment(order.basicWorkorderDetails.startTime, "HH:mm"),
-                  "minutes"
-                )
-              } minutes
+                  `${order.basicWorkorderDetails.expectedTime} `
+                // moment(order.basicWorkorderDetails.expectedTime, "HH:mm").diff(
+                //   moment(order.basicWorkorderDetails.startTime, "HH:mm"),
+                //   "minutes"
+                // )
+              } 
               </div>
             </Card.Body>
           </Card>
