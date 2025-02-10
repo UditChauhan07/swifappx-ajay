@@ -25,7 +25,7 @@ const WorkOrderDetails = ({ workOrder }) => {
           <Col md={6}>
             <h6 className="mb-3">{t('customerInfo')}</h6>
             <p className="mb-2">
-              <strong>{t('contact')}:</strong> {workOrder.customerDetailSection.CustomerEmail}
+              <strong>{t('Email')}:</strong> {workOrder.customerDetailSection.CustomerEmail}
             </p>
             <p className="mb-2">
               <strong>{t('address')}:</strong> {workOrder.customerDetailSection.CustomerAddress}

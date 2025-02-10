@@ -19,7 +19,7 @@
     "timePeriod": "Time Period",
     "orderDate": "Order Date",
   "customerInfo": "Customer Information",
-  "contact": "Contact",
+  "Email": "Email",
   "address": "Address",
   "workOrderDetails": "Work Order Details",
   "assignedTo": "Assigned To",
@@ -62,8 +62,6 @@
   },
   "no_work_order_assigned": "No Work Order Assigned",
   "no_work_order_message": "There are no work orders available at the moment.",
-   "Hours": "Hours"
-
-   
+   "Hours": "Hours",
   }
   
