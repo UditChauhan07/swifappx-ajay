@@ -37,7 +37,7 @@ const Login = () => {
 
   return (
     <Container className="vh-100 d-flex align-items-center justify-content-center">
-      <Card className="login-card" style={{ width: '100%', maxWidth: '400px' }}>
+      <Card className="login-card" style={{ width: '100%', maxWidth: '500px' }}>
         <Card.Body className="p-4">
         
         <div className="text-center mb-4"><img
@@ -47,7 +47,7 @@ const Login = () => {
                   alt="Logo"
                 />
               </div>
-          <h2 className="text-center mb-4">Work Order Manager</h2>
+          <h4 className="text-center mb-4">Sign in to Your Account</h4>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Username</Form.Label>
@@ -72,7 +72,7 @@ const Login = () => {
             </Form.Group>
 
             <div className="d-grid">
-              <Button variant="primary" type="submit" size="lg" disabled={isLoading} >    
+              <Button variant="primary" type="submit" size="lg" disabled={isLoading} className='rounded-pill'>    
               {isLoading ? (
                   <Spinner animation="border" size="sm" className="me-2" />
                 ) : (

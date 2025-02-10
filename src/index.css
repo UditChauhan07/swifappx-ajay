@@ -116,3 +116,29 @@ body {
     padding-right: 15px;
   }
 }
+
+@media (max-width: 480px) {
+  /* For very small devices like phones */
+  .sidebar {
+    width: 200px;
+  }
+  .main-content {
+    padding-left: 10px;
+  }
+
+  .sidebar .nav-link {
+    font-size: 14px; /* Smaller text on small screens */
+  }
+
+  .work-order-card {
+    width: 100%;
+  }
+
+  .login-card .form-control {
+    font-size: 0.9rem;
+  }
+
+  .login-card .btn-primary {
+    font-size: 0.9rem;
+  }
+}

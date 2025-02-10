@@ -49,11 +49,12 @@ const WorkOrderList = ({ workOrders,getWorkOrders }) => {
                 {/* <small>Assigned to: {order.assignedTo}</small> */}
                 {/* <small>{order.estimatedDuration}</small> */}
                 {
-                moment(order.basicWorkorderDetails.expectedTime, "HH:mm").diff(
-                  moment(order.basicWorkorderDetails.startTime, "HH:mm"),
-                  "minutes"
-                )
-              } minutes
+                  `${order.basicWorkorderDetails.expectedTime} `
+                // moment(order.basicWorkorderDetails.expectedTime, "HH:mm").diff(
+                //   moment(order.basicWorkorderDetails.startTime, "HH:mm"),
+                //   "minutes"
+                // )
+              } 
               </div>
             </Card.Body>
           </Card>

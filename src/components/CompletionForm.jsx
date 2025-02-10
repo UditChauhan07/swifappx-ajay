@@ -15,12 +15,13 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
     workDescription: "",
     price: "",
   });
-
+console.log('newItem', newItem)
   const handleAddItem = () => {
     if (newItem.workItem && newItem.workDescription) {
       setWorkItems([...workItems, { ...newItem }]);
       setNewWorkItems([...newWorkItems, { ...newItem }]);
-      setNewItem({ workItem: "", workDescription: "", new: true });
+      setNewItem({ workItem: "", workDescription: ""});
+      
     }
   };
 
@@ -32,7 +33,7 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
   };
 
   const handleItemChange = (field, value) => {
-    console.log(field, value);
+    // console.log(field, value);
     setNewItem({ ...newItem, [field]: value });
   };
 
@@ -64,7 +65,7 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
 
       const payload = {
         status: "Completed",
-        customerEmail: workOrder.customerDetailSection.CustomerEmail,
+        customerEmail: workOrder?.customerDetailSection?.CustomerEmail,
       };
       if (newWorkItems.length > 0) {
         payload.extraWorkDetails = newWorkItems;
@@ -78,7 +79,7 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
         payload,
         token
       );
-      console.log("response", response);
+      // console.log("response", response);
       Swal.close();
       if (response.success) {
         Swal.fire({
@@ -100,7 +101,7 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
           confirmButtonText: "Try Again",
         });
       }
-      console.log("Response:", response);
+      // console.log("Response:", response);
     } catch (error) {
       console.error("Error submitting data:", error);
       Swal.close();
@@ -113,16 +114,18 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
     }
     // onSubmit({ ...workOrder, workItems });
   };
-  // console.log(newWorkItems)
+  // console.log('workOrder:', workOrder)
 
   return (
     <Form className="mt-3">
-      <h5>{t("workItems")}</h5>
+      
 
       {/* Existing Work Items List */}
       <ListGroup className="mb-3">
         {newWorkItems?.length > 0 &&
-          newWorkItems.map((item, index) => (
+        <>
+        <h5>{t("workItems")}</h5>
+         { newWorkItems.map((item, index) => (
             <ListGroup.Item
               key={index}
               className="d-flex justify-content-between align-items-center"
@@ -142,10 +145,15 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
               </Button>
             </ListGroup.Item>
           ))}
+          </>
+        }
       </ListGroup>
 
       {workOrder.status == "Completed" &&
         workOrder.extraWorkDetails &&
+        <>
+        <h5>{t("workItems")}</h5>
+        {
         workOrder.extraWorkDetails.length > 0 && (
           <table className="table">
             <tbody>
@@ -169,6 +177,8 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
             </tbody>
           </table>
         )}
+        </>
+      }
 
       {workOrder.status != "Completed" && (
         <>
@@ -177,7 +187,7 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
               <Form.Control
                 type="text"
                 placeholder={t("itemName")}
-                value={newItem.work}
+                // value={newItem.work}
                 onChange={(e) => handleItemChange("workItem", e.target.value)}
               />
             </Col>
@@ -193,7 +203,7 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
               <Form.Control
                 type="text"
                 placeholder={t("description")}
-                value={newItem.description}
+                // value={newItem.description}
                 onChange={(e) =>
                   handleItemChange("workDescription", e.target.value)
                 }
