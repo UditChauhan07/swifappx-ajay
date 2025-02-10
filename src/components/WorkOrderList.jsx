@@ -20,7 +20,7 @@ const WorkOrderList = ({ workOrders,getWorkOrders }) => {
       {t(status)}
     </Badge>
   );
-  console.log(workOrders);
+  // console.log(workOrders);
 
   return (
     <div className="work-order-list">
