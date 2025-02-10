@@ -260,13 +260,13 @@ const Dashboard = () => {
             />
           </Row>
 
-          {/* Work Orders & Details (All in One Column) */}
+
           <Row>
             <Col xs={12}>
-              <h5 className="text-capitalize">{`${activeFilter} Work Orders`}</h5>
+            {/* <h5 className="text-capitalize">{`${activeFilter} ${t("Work Orders")}`}</h5> */}
               {filteredWorkOrders?.length == 0 && (
               
-                // <div className="text-danger">{`No ${activeFilter} Work order ${dateFilter}`}</div>
+
                 <div className="text-danger">
       {t('no_work_order', { activeFilter: translatedActiveFilter, dateFilter: translatedDateFilter })}
       </div>

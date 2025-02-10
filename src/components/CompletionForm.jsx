@@ -6,7 +6,7 @@ import { updateWorkOrderStatus } from "../lib/store";
 
 const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
   const { t } = useTranslation(); // Translation hook
-  const token=localStorage.getItem('UserToken');
+  const token = localStorage.getItem("UserToken");
 
   const [workItems, setWorkItems] = useState(workOrder.workorderDetails || []);
   const [newWorkItems, setNewWorkItems] = useState([]);
@@ -180,7 +180,7 @@ console.log('newItem', newItem)
         </>
       }
 
-      {workOrder.status != "Completed"  && (
+      {workOrder.status != "Completed" && (
         <>
           <Row className="mb-3">
             <Col xs={12} md={4}>
