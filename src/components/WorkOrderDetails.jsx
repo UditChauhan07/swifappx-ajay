@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 const WorkOrderDetails = ({ workOrder }) => {
   const { t } = useTranslation(); // Translation hook
-
+  console.log('workOrderDetails',workOrder)
   if (!workOrder) return null;
   return (
     <Card className="mb-4">
@@ -25,7 +25,7 @@ const WorkOrderDetails = ({ workOrder }) => {
           <Col md={6}>
             <h6 className="mb-3">{t('customerInfo')}</h6>
             <p className="mb-2">
-              <strong>{t('contact')}:</strong> {workOrder.customerDetailSection.CustomerEmail}
+              <strong>{t('email')}:</strong> {workOrder.customerDetailSection.CustomerEmail}
             </p>
             <p className="mb-2">
               <strong>{t('address')}:</strong> {workOrder.customerDetailSection.CustomerAddress}
