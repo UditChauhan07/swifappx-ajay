@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Card, Badge, Collapse } from "react-bootstrap";
+import { Card, Badge, Collapse, Button } from "react-bootstrap";
 import WorkOrderDetails from "./WorkOrderDetails";
 import CompletionForm from "./CompletionForm";
 import moment from "moment";
 import { useTranslation } from 'react-i18next';
+import { formatDate } from "../utils/formateDate";
 
 
-const WorkOrderList = ({ workOrders,getWorkOrders }) => {
+const WorkOrderList = ({ workOrders,getWorkOrders, workInProgress,setWorkInProgress}) => {
   const [expandedOrderId, setExpandedOrderId] = useState(null);
   const { t } = useTranslation(); // Translation hook
 
@@ -14,13 +15,30 @@ const WorkOrderList = ({ workOrders,getWorkOrders }) => {
     setExpandedOrderId(expandedOrderId === orderId ? null : orderId);
   };
 
-  const getStatusBadge = (status) => (
-    <Badge className={`status-badge ${status}`}>
-      {/* {t(status.charAt(0).toUpperCase() + status.slice(1))} */}
-      {t(status)}
+  // const getStatusBadge = (status) => (
+  //   <Badge className={`status-btn-${status}`}>
+  //     {t(status)}
+  //     </Badge>
+  // );
+  const getStatusBadge = (status) => {   
+
+    // Normalize status class name (lowercase + remove spaces)%
+    const statusClass = `status-btn-${status.replace(/\s+/g, '').toLowerCase()}`;
+  if(status === 'Assignment Canceled'){
+    return (
+      <Badge className={'status-btn-cancelled'}>
+    {t(`status.${status}`)}     
     </Badge>
-  );
-  // console.log(workOrders);
+    );
+  }
+    return (
+      <Badge className={statusClass}>
+    {t(`status.${status}`)}     
+    </Badge>
+    );
+  };
+  
+  console.log(workOrders);
 
   return (
     <div className="work-order-list">
@@ -39,9 +57,11 @@ const WorkOrderList = ({ workOrders,getWorkOrders }) => {
                 <div>
                   <h5 className="mb-1">{order.customerName}</h5>
                   <p className="text-muted mb-2">
-                    {new Date(order?.basicWorkorderDetails?.startDate).toLocaleDateString()}
+                    {/* {new Date(order?.basicWorkorderDetails?.startDate).toLocaleDateString()} */}
+                    {formatDate(order?.basicWorkorderDetails?.startDate)}
                   </p>
                 </div>
+             
                 {getStatusBadge(order.status)}
               </div>
               <p className="mb-2">{order?.workorderDetails[0]?.workDescription}</p>
@@ -62,7 +82,9 @@ const WorkOrderList = ({ workOrders,getWorkOrders }) => {
           {/* Expandable Work Order Details (Displayed Below Clicked Item) */}
           <Collapse in={expandedOrderId === order.id}>
             <div className="p-3 border-start border-primary">
-              <WorkOrderDetails workOrder={order} />
+              <WorkOrderDetails workOrder={order} getWorkOrders={getWorkOrders}
+               workInProgress={workInProgress} setWorkInProgress={setWorkInProgress}/>
+
               <CompletionForm workOrder={order} getWorkOrders={getWorkOrders} onSubmit={() => setExpandedOrderId(null)} />
             </div>
           </Collapse>

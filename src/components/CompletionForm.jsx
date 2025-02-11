@@ -3,7 +3,7 @@ import { Form, Button, Row, Col, ListGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import { updateWorkOrderStatus } from "../lib/store";
-
+import moment from "moment";
 const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
   const { t } = useTranslation(); // Translation hook
   const token=localStorage.getItem('UserToken');
@@ -13,18 +13,17 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
   const [newItem, setNewItem] = useState({
     workItem: "",
     workDescription: "",
-    price: "",
   });
-console.log('newItem', newItem)
+// console.log('newItem', newItem)
   const handleAddItem = () => {
     if (newItem.workItem && newItem.workDescription) {
       setWorkItems([...workItems, { ...newItem }]);
       setNewWorkItems([...newWorkItems, { ...newItem }]);
-      setNewItem({ workItem: "", workDescription: ""});
+      resetForm();
       
     }
   };
-
+// console.log('newItem', newItem)
   const handleRemoveItem = (index) => {
     // const updatedItems = workItems.filter((_, i) => i !== index);
     const updatedItems = newWorkItems.filter((_, i) => i !== index);
@@ -35,6 +34,15 @@ console.log('newItem', newItem)
   const handleItemChange = (field, value) => {
     // console.log(field, value);
     setNewItem({ ...newItem, [field]: value });
+  };
+
+  const resetForm = () => {
+    setNewItem({
+      workItem: "", 
+      workDescription: "",
+    });
+    document.getElementById("workItemInput").value = "";
+    document.getElementById("workDescriptionInput").value = "";
   };
 
   const handleSubmit = async (e) => {
@@ -65,6 +73,7 @@ console.log('newItem', newItem)
 
       const payload = {
         status: "Completed",
+        punchOut:await moment().format("DD MMM YYYY hh:mm A"),
         customerEmail: workOrder?.customerDetailSection?.CustomerEmail,
       };
       if (newWorkItems.length > 0) {
@@ -79,7 +88,7 @@ console.log('newItem', newItem)
         payload,
         token
       );
-      // console.log("response", response);
+      // console.log("response", response,payload);
       Swal.close();
       if (response.success) {
         Swal.fire({
@@ -117,44 +126,47 @@ console.log('newItem', newItem)
   // console.log('workOrder:', workOrder)
 
   return (
-    <Form className="mt-3">
+    <Form className="mt-3" >
       
 
-      {/* Existing Work Items List */}
-      <ListGroup className="mb-3">
-        {newWorkItems?.length > 0 &&
-        <>
+{/* New Items Work Items List */}
+     {workOrder?.status == "In Progress" &&
+        <ListGroup className="mb-3">
         <h5>{t("workItems")}</h5>
-         { newWorkItems.map((item, index) => (
-            <ListGroup.Item
-              key={index}
-              className="d-flex justify-content-between align-items-center"
-            >
-              <div>
-                <strong>{item.workItem}</strong> - ${item.price}
-                <br />
-                <small className="text-muted">{item.workDescription}</small>
-              </div>
-
-              <Button
-                variant="outline-danger"
-                size="sm"
-                onClick={() => handleRemoveItem(index)}
+          {newWorkItems?.length > 0 && 
+          <>
+           { newWorkItems.map((item, index) => (
+              <ListGroup.Item
+                key={index}
+                className="d-flex justify-content-between align-items-center"
               >
-                {t("remove")}
-              </Button>
-            </ListGroup.Item>
-          ))}
-          </>
-        }
-      </ListGroup>
+                <div>
+                  <strong>{item.workItem}</strong> 
+                  <br />
+                  <small className="text-muted">{item?.workDescription}</small>
+                </div>
+  
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={() => handleRemoveItem(index)}
+                >
+                  {t("remove")}
+                </Button>
+              </ListGroup.Item>
+            ))}
+            </>
+          }
+        </ListGroup>
+     } 
 
-      {workOrder.status == "Completed" &&
-        workOrder.extraWorkDetails &&
+{/* Extra works */}
+      {workOrder?.status == "Completed" &&
+        workOrder?.extraWorkDetails?.length>0 &&
         <>
         <h5>{t("workItems")}</h5>
         {
-        workOrder.extraWorkDetails.length > 0 && (
+        workOrder?.extraWorkDetails.length > 0 && (
           <table className="table">
             <tbody>
               <tr>
@@ -179,17 +191,29 @@ console.log('newItem', newItem)
         )}
         </>
       }
-
-      {workOrder.status != "Completed"  && (
+{/* add new items */}
+      {workOrder?.status == "In Progress"   && (
         <>
           <Row className="mb-3">
-            <Col xs={12} md={4}>
+            {/* <Col xs={12} md={4}>
               <Form.Control
                 type="text"
                 placeholder={t("itemName")}
-                // value={newItem.work}
+                id="workItemInput"
+                value={newItem.work}
                 onChange={(e) => handleItemChange("workItem", e.target.value)}
               />
+            </Col> */}
+              <Col xs={12} md={4}>
+              <Form.Group controlId="workItemInput">
+                <Form.Label>{t("itemName")}</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={t("itemName")}
+                  value={newItem.work}
+                  onChange={(e) => handleItemChange("workItem", e.target.value)}
+                />
+              </Form.Group>
             </Col>
             {/* <Col xs={12} md={3}>
           <Form.Control
@@ -199,17 +223,32 @@ console.log('newItem', newItem)
             onChange={(e) => handleItemChange('price', e.target.value)}
           />
         </Col> */}
-            <Col xs={12} md={5}>
+
+
+            {/* <Col xs={12} md={5}>
               <Form.Control
                 type="text"
                 placeholder={t("description")}
+                id="workDescriptionInput"
                 // value={newItem.description}
-                onChange={(e) =>
-                  handleItemChange("workDescription", e.target.value)
+                onChange={(e) =>{handleItemChange("workDescription", e.target.value);}
+                  
                 }
               />
-            </Col>
+            </Col> */}
+
+        <Col xs={12} md={5}>
+            <Form.Group controlId="workDescriptionInput">
+              <Form.Label>{t("description")}</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder={t("description")}
+                onChange={(e) => handleItemChange("workDescription", e.target.value)}
+              />
+            </Form.Group>
+          </Col>
           </Row>
+
           {workOrder.status !== "Completed" && (
             <>
               <div className="mb-3">

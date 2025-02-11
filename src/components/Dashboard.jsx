@@ -142,41 +142,41 @@ const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("today");
   const [language, setLanguage] = useState("en");
-
+  const [workInProgress, setWorkInProgress] = useState(false);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [workOrders, setWorkOrders] = useState([]);
-  const token=localStorage.getItem('UserToken');
-  const userId=localStorage.getItem('userId');
+  const token = localStorage.getItem("UserToken");
+  const userId = localStorage.getItem("userId");
   // console.log('sss',token)
-  
-  const getWorkOrders = () =>{
-    console.log('workorder hit')
-    const response=getWorkerOrderList(userId,token)
-    .then((response)=>{
-      console.log('response',response.data);
-      setWorkOrders(response.data)
-    })
-  
-  }
 
-  useEffect(()=>{
-  console.log('token', token);
-      getWorkOrders();
-    
-  },[token]);
+  const getWorkOrders = () => {
+    console.log("workorder hit");
+    const response = getWorkerOrderList(userId, token).then((response) => {
+      console.log("response", response.data);
+      const sortedWorkOrders = response.data.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
+      setWorkOrders(sortedWorkOrders);
+    });
+  };
+
+  useEffect(() => {
+    // console.log('token', token);
+    getWorkOrders();
+  }, [token]);
 
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language]);
 
-//   if (workOrders?.length <= 0) {
-//     Swal.fire({
-//         icon: "warning",
-//         title: t("no_work_order_assigned"), // Translatable key
-//         text: t("no_work_order_message"),
-//     });
-// }
+  //   if (workOrders?.length <= 0) {
+  //     Swal.fire({
+  //         icon: "warning",
+  //         title: t("no_work_order_assigned"), // Translatable key
+  //         text: t("no_work_order_message"),
+  //     });
+  // }
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
@@ -211,7 +211,6 @@ const Dashboard = () => {
 
     return true;
   });
-  console.log(activeFilter,dateFilter);
   const translatedActiveFilter = t(`filters.${activeFilter}`);
   const translatedDateFilter = t(`filters.${dateFilter}`);
   return (
@@ -263,17 +262,27 @@ const Dashboard = () => {
           {/* Work Orders & Details (All in One Column) */}
           <Row>
             <Col xs={12}>
-              <h5 className="text-capitalize">{`${activeFilter} Work Orders`}</h5>
+              {/* <h5 className="text-capitalize">{`${activeFilter} Work Orders`}</h5> */}
+              <h5 className="text-capitalize">
+                {t(`workOrderss.${activeFilter}`, {
+                  defaultValue: `${activeFilter} Work Orders`,
+                })}
+              </h5>
+
               {filteredWorkOrders?.length == 0 && (
-              
                 // <div className="text-danger">{`No ${activeFilter} Work order ${dateFilter}`}</div>
                 <div className="text-danger">
-      {t('no_work_order', { activeFilter: translatedActiveFilter, dateFilter: translatedDateFilter })}
-      </div>
+                  {t("no_work_order", {
+                    activeFilter: translatedActiveFilter,
+                    dateFilter: translatedDateFilter,
+                  })}
+                </div>
               )}
               <WorkOrderList
                 workOrders={filteredWorkOrders}
                 getWorkOrders={getWorkOrders}
+                workInProgress={workInProgress}
+                setWorkInProgress={setWorkInProgress}
               />
             </Col>
           </Row>
