@@ -23,7 +23,7 @@
   "address": "Address",
   "workOrderDetails": "Work Order Details",
   "assignedTo": "Assigned To",
-  "estimatedDuration": "Estimated Duration",
+  "estimatedDuration": "Estimated Duration (Hours) ",
   "description": "Description",
   "requiredWorkItems": "Required Work Items",
   "workItems": "Additional Work Items",
@@ -51,6 +51,7 @@
   "Completed":"Completed",
   "no_work_order": "No {{activeFilter}} Work order {{dateFilter}}",
   "filters": {
+    "In Progress": "In Progress",
     "today": "today",
     "weekly": "this week",
     "monthly": "this month",
@@ -58,11 +59,51 @@
     "Pending": "pending",
     "Completed": "completed",
     "canceled": "canceled",
-    "rescheduled": "rescheduled"
+    "rescheduled": "rescheduled",
+    "Canceled": "Canceled",
+    "Assignment Canceled": "Assignment Canceled"
+
   },
   "no_work_order_assigned": "No Work Order Assigned",
   "no_work_order_message": "There are no work orders available at the moment.",
    "Hours": "Hours",
-   "email": "Email"
+   "email": "Email",
+   "cancel": "Cancel",
+   "confirmWorkOrderCancelation": "Confirm work order cancellation?",
+   "yesCancel": "Yes, cancel it!",
+   "noGoBack": "No, go back",
+   "canceling": "Canceling...",
+   "workOrderCanceling": "Work order is being canceled",
+   "workOrderCancelledSuccess": "Work order canceled successfully!",
+   "genericCancelError": "There was an error while canceling the work order.",
+   "genericApiError": "Something went wrong. Please try again later.",
+
+   "confirmWorkOrderStart": "Are you sure you want to start this work order?",
+   "yesStart": "Yes, Start",
+   "starting": "Starting",
+   "workOrderStarting": "The work order is starting...",
+ 
+   "workOrderStartedSuccess": "The work order has started successfully!",
+   "genericStartError": "Something went wrong while starting the work order. Please try again.",
+   "inProgressOrders": "In Progress Orders",
+   "canceledOrders": "Canceled Orders",
+   "workOrderss": {
+    "all": "All Work Orders",
+    "Pending": "Pending Work Orders",
+    "Completed": "Completed Work Orders",
+    "In Progress": "In Progress Work Orders",
+    "Canceled": "Canceled Work Orders"
+  },  
+  "status": {
+    "Cancelled": "Cancelled",
+    "Completed": "Completed",
+    "Pending": "Pending",
+    "In Progress": "In Progress",
+    "Start": "Start",
+    "Cancel": "Cancel",
+  "Assignment Canceled": "Assignment Canceled"
+  },
+  "itemNameLabel": "Item Name",
+  "descriptionLabel": "Description"
   }
   

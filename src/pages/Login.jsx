@@ -72,7 +72,7 @@ const Login = () => {
             </Form.Group>
 
             <div className="d-grid">
-              <Button variant="primary" type="submit" size="lg" disabled={isLoading} className='rounded-pill'>    
+              <Button variant="primary" type="submit" size="lg" disabled={isLoading} className='rounded-pill login-btn'>    
               {isLoading ? (
                   <Spinner animation="border" size="sm" className="me-2" />
                 ) : (

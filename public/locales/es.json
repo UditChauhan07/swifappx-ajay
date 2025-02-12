@@ -23,7 +23,7 @@
   "address": "Dirección",
   "workOrderDetails": "Detalles de la Orden de Trabajo",
   "assignedTo": "Asignado a",
-  "estimatedDuration": "Duración Estimada",
+  "estimatedDuration": "Duración Estimada (Horas) ",
   "description": "Descripción",
   "requiredWorkItems": "Elementos de Trabajo Requeridos",
   "workItems": "Elementos de trabajo adicionales",
@@ -57,6 +57,7 @@
   "somethingWentWrong": "Algo salió mal. Por favor, inténtelo de nuevo más tarde.",
   "no_work_order": "No hay {{activeFilter}} Orden de trabajo {{dateFilter}}",
   "filters": {
+   "In Progress": "En Progreso",
     "today": "hoy",
     "weekly": "esta semana",
     "monthly": "este mes",
@@ -64,11 +65,49 @@
     "Pending": "pendiente",
     "Completed": "completado",
     "canceled": "cancelado",
-    "rescheduled": "reprogramado"
+    "rescheduled": "reprogramado",
+    "Canceled": "Cancelado",
+    "Assignment Canceled": "Asignación Cancelada"
+
   },
 "no_work_order_assigned": "No hay órdenes de trabajo asignadas",
 "no_work_order_message": "No hay órdenes de trabajo disponibles en este momento.",
 "Hours": "Horas",
 "email": "Correo electrónico",
-" Work Orders":"Órdenes de trabajo"
+"cancel": "Cancelar",
+"confirmWorkOrderCancelation": "¿Confirmar cancelación de orden de trabajo?",
+"yesCancel": "¡Sí, cancélalo!",
+"noGoBack": "No, volver",
+"canceling": "Cancelando...",
+"workOrderCanceling": "La orden de trabajo está siendo cancelada",
+"workOrderCancelledSuccess": "¡Orden de trabajo cancelada con éxito!",
+"genericCancelError": "Hubo un error al cancelar la orden de trabajo.",
+"genericApiError": "Algo salió mal. Inténtalo de nuevo más tarde.",
+"confirmWorkOrderStart": "¿Estás seguro de que quieres iniciar esta orden de trabajo?",
+"yesStart": "Sí, Iniciar",
+"starting": "Iniciando",
+"workOrderStarting": "La orden de trabajo se está iniciando...",
+"workOrderStartedSuccess": "¡La orden de trabajo se ha iniciado con éxito!",
+"genericStartError": "Ocurrió un error al iniciar la orden de trabajo. Por favor, inténtalo de nuevo.",
+"inProgressOrders": "Órdenes en Progreso",
+"canceledOrders": "Órdenes Canceladas",
+"workOrderss": {
+  "all": "Todas las órdenes de trabajo",
+  "Pending": "Órdenes de trabajo pendientes",
+  "Completed": "Órdenes de trabajo completadas",
+  "In Progress": "Órdenes de trabajo en progreso",
+  "Canceled": "Órdenes de trabajo canceladas"
+},
+"status": {
+  "Cancelled": "Cancelado",
+  "Completed": "Completado",
+  "Pending": "Pendiente",
+  "In Progress": "En Progreso",
+   "Start": "Iniciar",
+  "Cancel": "Cancelar",
+  "Assignment Canceled": "Asignación Cancelada"
+},
+"itemNameLabel": "Nombre del ítem",
+"descriptionLabel": "Descripción",
+"Work Orders":"Órdenes de trabajo"
 }

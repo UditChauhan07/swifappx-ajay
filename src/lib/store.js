@@ -20,9 +20,26 @@ export const FieldUserLoginApi = async (formData) => {
 };
 
 export const getWorkerOrderList = async (workerId,token) => {
-console.log('token: ' ,token);
     try {
       const response = await axios.get(`${Url}/gfwok235mt/${encodeURIComponent(workerId)}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+      });
+      // console.log(response, "worker response");
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return error.response.data;
+      }
+      throw new Error("An unexpected error occurred");
+    }
+  };
+
+export const updateWorkOrderStatus = async (woId,payload,token) => {
+    try {
+      const response = await axios.put(`${Url}/ufu2w34e5t/${encodeURIComponent(woId)}`,payload, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
@@ -38,10 +55,9 @@ console.log('token: ' ,token);
     }
   };
 
-export const updateWorkOrderStatus = async (woId,payload,token) => {
-console.log("UpdateWorkOrderStatus', token: " + token);
+export const startWorkOrder = async (woId,payload,token) => {
     try {
-      const response = await axios.put(`${Url}/ufu2w34e5t/${encodeURIComponent(woId)}`,payload, {
+      const response = await axios.post(`${Url}/stm345r43e/${encodeURIComponent(woId)}`,payload, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`

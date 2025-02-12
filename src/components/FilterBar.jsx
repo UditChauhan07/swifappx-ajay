@@ -110,25 +110,25 @@ const FilterBar = ({ activeFilter, setActiveFilter, dateFilter, setDateFilter })
           <small className="text-muted d-block mb-2">{t('timePeriod')}</small>
           <ButtonGroup>
             <Button 
-              variant={dateFilter === 'today' ? 'primary' : 'outline-primary'}
+              variant={dateFilter === 'today' ? 'dark' : 'outline-dark'}
               onClick={() => setDateFilter('today')}
             >
               {t('today')}
             </Button>
             <Button 
-              variant={dateFilter === 'weekly' ? 'primary' : 'outline-primary'}
+              variant={dateFilter === 'weekly' ? 'dark' : 'outline-dark'}
               onClick={() => setDateFilter('weekly')}
             >
               {t('thisWeek')}
             </Button>
             <Button 
-              variant={dateFilter === 'monthly' ? 'primary' : 'outline-primary'}
+              variant={dateFilter === 'monthly' ? 'dark' : 'outline-dark'}
               onClick={() => setDateFilter('monthly')}
             >
               {t('thisMonth')}
             </Button>
             <Button 
-              variant={dateFilter === 'all' ? 'primary' : 'outline-primary'}
+              variant={dateFilter === 'all' ? 'dark' : 'outline-dark'}
               onClick={() => setDateFilter('all')}
             >
               {t('allTime')}
