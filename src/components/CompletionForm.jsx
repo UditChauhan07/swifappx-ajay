@@ -6,7 +6,7 @@ import { updateWorkOrderStatus } from "../lib/store";
 import moment from "moment";
 const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
   const { t } = useTranslation(); // Translation hook
-  const token=localStorage.getItem('UserToken');
+  const token = localStorage.getItem("UserToken");
 
   const [workItems, setWorkItems] = useState(workOrder.workorderDetails || []);
   const [newWorkItems, setNewWorkItems] = useState([]);

@@ -260,7 +260,6 @@ const Dashboard = () => {
               setDateFilter={setDateFilter}
             />
           </Row>
-
           {/* Work Orders & Details (All in One Column) */}
           {loading ? (
         // Bootstrap Spinner Loader
