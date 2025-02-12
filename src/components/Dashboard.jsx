@@ -148,17 +148,19 @@ const Dashboard = () => {
   const [workOrders, setWorkOrders] = useState([]);
   const token = localStorage.getItem("UserToken");
   const userId = localStorage.getItem("userId");
+  const [loading, setLoading] = useState(false);
   // console.log('sss',token)
 
   const getWorkOrders = () => {
     console.log("workorder hit");
+    setLoading(true);
     const response = getWorkerOrderList(userId, token).then((response) => {
       console.log("response", response.data);
       const sortedWorkOrders = response.data.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
       setWorkOrders(sortedWorkOrders);
-    });
+    }).catch((error) => {console.log("error", error);}).finally(() => {setLoading(false);});
   };
 
   useEffect(() => {
@@ -260,6 +262,14 @@ const Dashboard = () => {
           </Row>
 
           {/* Work Orders & Details (All in One Column) */}
+          {loading ? (
+        // Bootstrap Spinner Loader
+        <div className="d-flex justify-content-center align-items-center mt-4">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
           <Row>
             <Col xs={12}>
               {/* <h5 className="text-capitalize">{`${activeFilter} Work Orders`}</h5> */}
@@ -286,6 +296,7 @@ const Dashboard = () => {
               />
             </Col>
           </Row>
+          )}
         </Container>
       </div>
     </div>
