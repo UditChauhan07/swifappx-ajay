@@ -5,8 +5,8 @@ import moment from "moment";
 import WorkOrderCancelModal from "./modals/WorkOrderCancelModal";
 import Swal from "sweetalert2";
 import { startWorkOrder, updateWorkOrderStatus } from "../lib/store";
-import { formatDate } from "../utils/formateDate";
-const WorkOrderDetails = ({ workOrder, getWorkOrders,workInProgress,setWorkInProgress }) => {
+import { convertToAMPM, formatDate } from "../utils/formateDate";
+const WorkOrderDetails = ({ workOrder, getWorkOrders, setExpandedOrderId }) => {
   const [modalShow, setModalShow] = useState(false);
   const token = localStorage.getItem("UserToken");
   const { t } = useTranslation(); // Translation hook
@@ -66,6 +66,7 @@ const WorkOrderDetails = ({ workOrder, getWorkOrders,workInProgress,setWorkInPro
         });
 
         getWorkOrders();
+        setExpandedOrderId(null);
       } else {
         await Swal.fire({
           title: t("error"),
@@ -88,7 +89,7 @@ const WorkOrderDetails = ({ workOrder, getWorkOrders,workInProgress,setWorkInPro
 
     setModalShow(false);
   };
-//start work 
+  //start work
   const startWork = async () => {
     const payload = {
       startTime: await moment().format("DD MMM YYYY hh:mm A"),
@@ -153,7 +154,6 @@ const WorkOrderDetails = ({ workOrder, getWorkOrders,workInProgress,setWorkInPro
     }
   };
 
-
   const transalteText = (text) => {
     return t(`status.${text}`);
   };
@@ -163,13 +163,13 @@ const WorkOrderDetails = ({ workOrder, getWorkOrders,workInProgress,setWorkInPro
     const statusClass = `status-btn-${status
       .replace(/\s+/g, "")
       .toLowerCase()}`;
-      if(status === 'Assignment Canceled'){
-        return (
-          <Badge className={'status-btn-cancelled'}>
-        {t(`status.${status}`)}     
+    if (status === "Assignment Canceled") {
+      return (
+        <Badge className={"status-btn-cancelled"}>
+          {t(`status.${status}`)}
         </Badge>
-        );
-      }
+      );
+    }
 
     return <Badge className={statusClass}>{t(`status.${status}`)}</Badge>;
   };
@@ -188,19 +188,18 @@ const WorkOrderDetails = ({ workOrder, getWorkOrders,workInProgress,setWorkInPro
                 {/* {new Date(
                   workOrder?.basicWorkorderDetails?.startDate
                 ).toLocaleDateString()} */}
-                {formatDate(workOrder?.basicWorkorderDetails?.startDate)}
+                {formatDate(workOrder?.basicWorkorderDetails?.startDate)}{" "}
+                {convertToAMPM(workOrder?.basicWorkorderDetails?.startTime)}
               </p>
             </div>
             <div className="d-inline justify-content-between align-items-start mb-4">
-            {workOrder?.status != "Pending" && (
-              <div className="mb-2">
-                {getStatusBadge(workOrder.status)}
-              </div>
-            )}
+              {workOrder?.status != "Pending" && (
+                <div className="mb-2">{getStatusBadge(workOrder.status)}</div>
+              )}
               <div className="mb-2">
                 {workOrder?.status == "Pending" && (
                   <Badge className={`btn btn primary`} onClick={startWork}>
-                    {transalteText('Start')}
+                    {transalteText("Start")}
                   </Badge>
                 )}
               </div>
@@ -209,7 +208,7 @@ const WorkOrderDetails = ({ workOrder, getWorkOrders,workInProgress,setWorkInPro
                   className={`status-btn-cancelled`}
                   onClick={() => setModalShow(true)}
                 >
-                 { transalteText('Cancel')}
+                  {transalteText("Cancel")}
                 </Badge>
               )}
             </div>
@@ -225,6 +224,10 @@ const WorkOrderDetails = ({ workOrder, getWorkOrders,workInProgress,setWorkInPro
               <p className="mb-2">
                 <strong>{t("address")}:</strong>{" "}
                 {workOrder?.customerDetailSection?.CustomerAddress}
+              </p>
+              <p className="mb-2">
+                <strong>{t("customerContact")}:</strong>{" "}
+                {workOrder?.customerDetailSection?.customerContact}
               </p>
             </Col>
             <Col md={6}>

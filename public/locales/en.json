@@ -104,7 +104,10 @@
   "Assignment Canceled": "Assignment Canceled"
   },
   "itemNameLabel": "Item Name",
-  "descriptionLabel": "Description"
+  "descriptionLabel": "Description",
+  "customerContact": "Customer Contact",
+  "canceledAssignmentTitle": "Assignment Canceled",
+"canceledAssignmentMessage": "The assignment was canceled for the following reason:"
    
   }
   

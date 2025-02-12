@@ -4,7 +4,7 @@ import WorkOrderDetails from "./WorkOrderDetails";
 import CompletionForm from "./CompletionForm";
 import moment from "moment";
 import { useTranslation } from 'react-i18next';
-import { formatDate } from "../utils/formateDate";
+import { convertToAMPM, formatDate } from "../utils/formateDate";
 
 
 const WorkOrderList = ({ workOrders,getWorkOrders, workInProgress,setWorkInProgress}) => {
@@ -38,7 +38,14 @@ const WorkOrderList = ({ workOrders,getWorkOrders, workInProgress,setWorkInProgr
     );
   };
   
-  console.log(workOrders);
+  const getExpctedtime = (time) => {
+      return (
+        `${time} ${t('Hours')}`
+      )
+  } 
+
+
+  // console.log(workOrders);
 
   return (
     <div className="work-order-list">
@@ -57,24 +64,27 @@ const WorkOrderList = ({ workOrders,getWorkOrders, workInProgress,setWorkInProgr
                 <div>
                   <h5 className="mb-1">{order.customerName}</h5>
                   <p className="text-muted mb-2">
-                    {/* {new Date(order?.basicWorkorderDetails?.startDate).toLocaleDateString()} */}
-                    {formatDate(order?.basicWorkorderDetails?.startDate)}
+                    {formatDate(order?.basicWorkorderDetails?.startDate)} {convertToAMPM(order?.basicWorkorderDetails?.startTime)}
                   </p>
                 </div>
              
                 {getStatusBadge(order.status)}
               </div>
-              <p className="mb-2">{order?.workorderDetails[0]?.workDescription}</p>
+              {/* description  */}
+              {/* <p className="mb-2">{order?.workorderDetails[0]?.workDescription}</p> */}
+              <p className="mb-2">
+                {(() => {
+                  const text = order?.workorderDetails[0]?.workDescription || "";
+                  const words = text.split(" ");
+                  return words.length > 50 
+                    ? words.slice(0, 50).join(" ") + "..."
+                    : text;
+                })()}
+              </p>
+
               <div className="d-flex justify-content-between text-muted">
-                {/* <small>Assigned to: {order.assignedTo}</small> */}
-                {/* <small>{order.estimatedDuration}</small> */}
-                {
-                  `${order.basicWorkorderDetails.expectedTime} `
-                // moment(order.basicWorkorderDetails.expectedTime, "HH:mm").diff(
-                //   moment(order.basicWorkorderDetails.startTime, "HH:mm"),
-                //   "minutes"
-                // )
-              } 
+              {/* expected time */}
+                {getExpctedtime(order?.basicWorkorderDetails?.expectedTime)}  
               </div>
             </Card.Body>
           </Card>
@@ -82,9 +92,7 @@ const WorkOrderList = ({ workOrders,getWorkOrders, workInProgress,setWorkInProgr
           {/* Expandable Work Order Details (Displayed Below Clicked Item) */}
           <Collapse in={expandedOrderId === order.id}>
             <div className="p-3 border-start border-primary">
-              <WorkOrderDetails workOrder={order} getWorkOrders={getWorkOrders}
-               workInProgress={workInProgress} setWorkInProgress={setWorkInProgress}/>
-
+              <WorkOrderDetails workOrder={order} getWorkOrders={getWorkOrders} setExpandedOrderId={setExpandedOrderId}/>
               <CompletionForm workOrder={order} getWorkOrders={getWorkOrders} onSubmit={() => setExpandedOrderId(null)} />
             </div>
           </Collapse>

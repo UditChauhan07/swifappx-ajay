@@ -108,8 +108,10 @@
   "Assignment Canceled": "Asignación Cancelada"
 },
 "itemNameLabel": "Nombre del ítem",
-"descriptionLabel": "Descripción"
-
+"descriptionLabel": "Descripción",
+"customerContact": "Contacto del Cliente",
+ "canceledAssignmentTitle": "Asignación Cancelada",
+  "canceledAssignmentMessage": "La asignación fue cancelada por la siguiente razón:"
 
 
 }
