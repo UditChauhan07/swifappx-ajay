@@ -266,6 +266,18 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
           )}
         </>
       )}
+
+{workOrder?.status === "Assignment Canceled" && workOrder?.work_order_cancel_Reason && (
+  <div className="alert alert-danger d-flex align-items-center p-3 rounded shadow-sm mt-4" role="alert">
+    <i className="bi bi-exclamation-triangle-fill me-2" style={{ fontSize: "1.5rem" }}></i>
+    <div>
+      <h5 className="fw-bold mb-1">{t("canceledAssignmentTitle")}</h5>
+      <p className="mb-0">{workOrder.work_order_cancel_Reason}</p>
+    </div>
+  </div>
+)}
+
+
     </Form>
   );
 };
