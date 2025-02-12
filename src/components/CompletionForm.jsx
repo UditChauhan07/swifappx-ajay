@@ -171,10 +171,10 @@ const CompletionForm = ({ workOrder, getWorkOrders, onSubmit }) => {
             <tbody>
               <tr>
                 <th>
-                  <strong>Item:</strong>
+                  <strong>{t("itemName")}</strong>
                 </th>
                 <th>
-                  <strong>Description:</strong>
+                  <strong>{t("description")}</strong>
                 </th>
               </tr>
 
