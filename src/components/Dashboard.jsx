@@ -259,7 +259,7 @@ const Dashboard = () => {
             />
           </Row>
 
-          {/* Work Orders & Details (All in One Column) */}
+
           <Row>
             <Col xs={12}>
               {/* <h5 className="text-capitalize">{`${activeFilter} Work Orders`}</h5> */}
