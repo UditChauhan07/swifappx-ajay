@@ -22,7 +22,7 @@ const Login = () => {
         localStorage.setItem("userId", response.user.id);
         localStorage.setItem("SessionToken", response.sessionId);
         setisLoading(false);
-        Navigate("/");
+        Navigate("/dashboard");
       }else{
         // alert("Invalid credentials");
         setError(response.message);

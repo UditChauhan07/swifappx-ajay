@@ -137,6 +137,7 @@ import FilterBar from "./FilterBar";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { field_user_logout, getWorkerOrderList } from "../lib/store";
+import UserMonitor from "../firebase/UserMonitor";
 
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -150,13 +151,14 @@ const Dashboard = () => {
   const userId = localStorage.getItem("userId");
   const [loading, setLoading] = useState(false);
   // console.log('sss',token)
+  
 
   const getWorkOrders = () => {
     console.log("workorder hit");
     setLoading(true);
     const response = getWorkerOrderList(userId, token).then((response) => {
-      console.log("response", response.data);
-      const sortedWorkOrders = response.data.sort(
+      console.log("response", response?.data);
+      const sortedWorkOrders = response?.data?.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
       setWorkOrders(sortedWorkOrders);
@@ -219,6 +221,8 @@ const Dashboard = () => {
   const translatedActiveFilter = t(`filters.${activeFilter}`);
   const translatedDateFilter = t(`filters.${dateFilter}`);
   return (
+    <>
+    <UserMonitor/>
     <div className="d-flex">
       {/* Sidebar for Filters */}
       <Sidebar
@@ -303,6 +307,7 @@ const Dashboard = () => {
         </Container>
       </div>
     </div>
+    </>
   );
 };
 
