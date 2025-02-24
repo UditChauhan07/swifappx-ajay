@@ -136,7 +136,7 @@ import Sidebar from "./Sidebar";
 import FilterBar from "./FilterBar";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { getWorkerOrderList } from "../lib/store";
+import { field_user_logout, getWorkerOrderList } from "../lib/store";
 
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -180,6 +180,9 @@ const Dashboard = () => {
   //     });
   // }
   const handleLogout = () => {
+    field_user_logout(localStorage.getItem("SessionToken"), userId).then(() => {
+      console.log("Logout completed");
+    }).catch(() => {console.log("Failed to log out");});
     localStorage.clear();
     navigate("/login");
   };
