@@ -7,6 +7,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setisLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const Navigate = useNavigate();
 
@@ -19,20 +20,23 @@ const Login = () => {
       if (response.status === true) {
         localStorage.setItem("UserToken", response.token);
         localStorage.setItem("userId", response.user.id);
+        localStorage.setItem("SessionToken", response.sessionId);
+        localStorage.setItem("companyId", response.companyId);
         setisLoading(false);
-        Navigate("/");
+        Navigate("/dashboard");
       }else{
-        alert("Invalid credentials");
+        // alert("Invalid credentials");
+        setError(response.message);
       }
     }catch (e) {
       console.error("Error in Login API", e);
-      setLoading(false);
-      alert("Failed to login");
+      // setLoading(false);
+      // alert("Failed to login");
+      setError(e.message);
     }finally {
       setisLoading(false);
     }
 
-    onLogin(username, password);
   };
 
   return (
@@ -55,7 +59,7 @@ const Login = () => {
                 type="text"
                 placeholder="Enter username"
                 value={username}
-                onChange={(e) => setUsername(e.target.value.trim())}
+                onChange={(e) => {setUsername(e.target.value.trim());setError(null)}}
                 required
               />
             </Form.Group>
@@ -66,7 +70,7 @@ const Login = () => {
                 type="password"
                 placeholder="Enter password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value.trim())}
+                onChange={(e) => {setPassword(e.target.value.trim());setError(null)}}
                 required
               />
             </Form.Group>
@@ -80,6 +84,7 @@ const Login = () => {
                 )}  
               </Button>
             </div>
+            {error && <div className="text-danger text-center">{error}</div>}
           </Form>
         </Card.Body>
       </Card>

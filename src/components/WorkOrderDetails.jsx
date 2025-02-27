@@ -9,6 +9,7 @@ import { convertToAMPM, formatDate } from "../utils/formateDate";
 const WorkOrderDetails = ({ workOrder, getWorkOrders, setExpandedOrderId }) => {
   const [modalShow, setModalShow] = useState(false);
   const token = localStorage.getItem("UserToken");
+  const company = localStorage.getItem("companyId");
   const { t } = useTranslation(); // Translation hook
   if (!workOrder) return null;
 
@@ -93,6 +94,7 @@ const WorkOrderDetails = ({ workOrder, getWorkOrders, setExpandedOrderId }) => {
   const startWork = async () => {
     const payload = {
       startTime: await moment().format("DD MMM YYYY hh:mm A"),
+      companyId:company,
     };
     try {
       const result = await Swal.fire({
