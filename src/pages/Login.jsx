@@ -21,6 +21,7 @@ const Login = () => {
         localStorage.setItem("UserToken", response.token);
         localStorage.setItem("userId", response.user.id);
         localStorage.setItem("SessionToken", response.sessionId);
+        localStorage.setItem("companyId", response.companyId);
         setisLoading(false);
         Navigate("/dashboard");
       }else{
