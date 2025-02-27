@@ -32,6 +32,7 @@ function App() {
       <Routes>
       <Route path="/login" element={<Login /> } />
       <Route path="/" element={<PrivateRoute/>}>
+      <Route path="/" element={<Dashboard/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
       </Route>
       </Routes>
